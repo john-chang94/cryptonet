@@ -7,7 +7,7 @@ import Cryptocurrencies from "./components/Cryptocurrencies";
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <div className="navbar">
         <Navbar />
       </div>
