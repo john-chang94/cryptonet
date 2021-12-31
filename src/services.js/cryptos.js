@@ -17,3 +17,16 @@ export const getCryptos = async (count) => {
     console.log(err);
   }
 };
+
+export const getCrypto = async (coinId) => {
+  try {
+    const res = await axios.get(
+      `https://coinranking1.p.rapidapi.com/coin/${coinId}`,
+      { headers: cryptoApiHeaders }
+    );
+
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -6,13 +6,12 @@
   overflow: hidden;
   display: flex;
 }
-a:hover{
+a:hover {
   color: #1890ff !important;
 }
 .navbar {
   flex: 0.2;
   background-color: rgb(0, 21, 41);
-  height: 100vh;
 }
 .nav-container {
   background-color: rgb(0, 21, 41);
@@ -46,6 +45,12 @@ a:hover{
 .main {
   flex: 0.8;
   width: 100%;
+}
+.loader {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 1300px) {
@@ -81,7 +86,7 @@ a:hover{
     margin-right: 10px;
   }
   .nav-container {
-    /* height: 8vh; */
+    height: 8vh;
     position: fixed;
     width: 100%;
     z-index: 100;
@@ -98,4 +103,40 @@ a:hover{
 
 .crypto-icon {
   width: 30px;
+}
+.home-cryptos-label {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* antd adds margin-top for some reason */
+.home-cryptos-label h3 {
+  margin-top: 0 !important;
+}
+.crypto-search {
+  width: 250px;
+  /* margin-top: 20px; */
+  margin-bottom: 20px;
+}
+.coin-heading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.coin-heading-container h2 {
+  color: #0071bd !important;
+  font-weight: bold !important;
+}
+
+.footer {
+  background-color: rgb(0, 21, 41);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer-title {
+  color: white !important;
+  text-align: center;
 }
