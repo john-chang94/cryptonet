@@ -116,7 +116,6 @@ a:hover {
 }
 .crypto-search {
   width: 250px;
-  /* margin-top: 20px; */
   margin-bottom: 20px;
 }
 .coin-heading-container {
@@ -124,9 +123,26 @@ a:hover {
   flex-direction: column;
   align-items: center;
 }
-.coin-heading-container h2 {
+.coin-details-heading {
   color: #0071bd !important;
   font-weight: bold !important;
+}
+.coin-stats {
+  display: flex !important;
+  font-size: 1rem;
+  opacity: 0.9;
+  padding: 10px;
+  border-bottom: 1px solid #d9d9d9;
+}
+.stat {
+  margin-left: 10px;
+  font-weight: bold;
+}
+.coin-desc-container {
+  margin-top: 30px;
+}
+.coin-link-container {
+  justify-content: space-between;
 }
 
 .footer {
