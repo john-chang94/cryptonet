@@ -5,6 +5,11 @@ const cryptoApiHeaders = {
   "x-rapidapi-key": "c69f98f65dmshd701837d3cab2e2p189dd6jsn8d7f621d2c1a",
 };
 
+const cryptoNewsApiHeaders = {
+  "x-rapidapi-host": "free-news.p.rapidapi.com",
+  "x-rapidapi-key": "c69f98f65dmshd701837d3cab2e2p189dd6jsn8d7f621d2c1a",
+};
+
 export const getCryptos = async (count) => {
   try {
     const res = await axios.get(
@@ -37,7 +42,20 @@ export const getCryptoHistory = async (coinId, timeframe) => {
       `https://coinranking1.p.rapidapi.com/coin/${coinId}/history/${timeframe}`,
       { headers: cryptoApiHeaders }
     );
-    
+
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getCryptoNews = async (query, count) => {
+  try {
+    const res = await axios.get(
+      `https://free-news.p.rapidapi.com/v1/search?q=${query}&page_size=${count}&lang=en`,
+      { headers: cryptoNewsApiHeaders }
+    );
+
     return res.data;
   } catch (err) {
     console.log(err);

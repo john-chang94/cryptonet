@@ -19,10 +19,12 @@ import { useQuery } from "react-query";
 import { getCrypto, getCryptoHistory } from "../services.js/cryptos";
 import Loader from "./Loader";
 import LineChart from "./LineChart";
+import News from "./News";
 
 const CryptoDetails = () => {
   const { coinId } = useParams();
   const [timeframe, setTimeframe] = useState("24h");
+
   const { data, isLoading } = useQuery(["crypto", coinId], () =>
     getCrypto(coinId)
   );
@@ -99,18 +101,14 @@ const CryptoDetails = () => {
         </p>
       </div>
 
-      <Typography.Title level={5}>
-        Change timeframe
-      </Typography.Title>
+      <Typography.Title level={5}>Change timeframe</Typography.Title>
       <Select
         defaultValue={timeframe}
         className="select-timeframe"
         onChange={(value) => setTimeframe(value)}
       >
         {times.map((time) => (
-          <Select.Option key={time}>
-            {time}
-          </Select.Option>
+          <Select.Option key={time}>{time}</Select.Option>
         ))}
       </Select>
 
@@ -158,6 +156,13 @@ const CryptoDetails = () => {
           ))}
         </Col>
       </Row>
+
+      <div className="coin-news-heading">
+        <Typography.Title level={3}>
+          {coin.name} News
+        </Typography.Title>
+        <News simplified query={coin.name} />
+      </div>
     </div>
   );
 };

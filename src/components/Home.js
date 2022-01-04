@@ -7,6 +7,7 @@ import millify from "millify";
 
 import Cryptocurrencies from "./Cryptocurrencies";
 import Loader from "./Loader";
+import News from "./News";
 
 const Home = () => {
   const { data, isLoading } = useQuery(["cryptos"], () => getCryptos(10));
@@ -56,6 +57,16 @@ const Home = () => {
         </Typography.Title>
       </div>
       <Cryptocurrencies simplified />
+      
+      <div className="home-news-label">
+        <Typography.Title level={3}>
+          Latest Crypto News
+        </Typography.Title>
+        <Typography.Title level={3}>
+          <Link to="/news">Show More</Link>
+        </Typography.Title>
+      </div>
+      <News simplified />
     </div>
   );
 };

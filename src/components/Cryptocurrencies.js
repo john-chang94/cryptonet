@@ -9,12 +9,12 @@ import Loader from "./Loader";
 
 const Cryptocurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100;
-  // Fetch cryptos using react-query
+  const [cryptos, setCryptos] = useState(null);
+  const [search, setSearch] = useState("");
+  
   const { data, isLoading } = useQuery(["cryptos", count], () =>
     getCryptos(count)
   );
-  const [cryptos, setCryptos] = useState(null);
-  const [search, setSearch] = useState("");
 
   // Filter through list with user's search term
   useEffect(() => {
