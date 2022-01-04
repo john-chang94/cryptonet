@@ -16,16 +16,25 @@ import {
 } from "@ant-design/icons";
 
 import { useQuery } from "react-query";
-import { getCrypto } from "../services.js/cryptos";
+import { getCrypto, getCryptoHistory } from "../services.js/cryptos";
 import Loader from "./Loader";
+import LineChart from "./LineChart";
 
 const CryptoDetails = () => {
   const { coinId } = useParams();
+  const [timeframe, setTimeframe] = useState("24h");
   const { data, isLoading } = useQuery(["crypto", coinId], () =>
     getCrypto(coinId)
   );
-  console.log(data);
+  const { data: coinHistory } = useQuery(
+    ["cryptoHistory", coinId, timeframe],
+    () => getCryptoHistory(coinId, timeframe)
+  );
+
   const coin = data?.data?.coin;
+
+  // Placed before assigning stats array because undefined error
+  if (isLoading) return <Loader />;
 
   const stats = [
     {
@@ -76,7 +85,7 @@ const CryptoDetails = () => {
     },
   ];
 
-  if (isLoading) return <Loader />;
+  const times = ["3h", "24h", "7d", "30d", "1y", "5y"];
 
   return (
     <div>
@@ -89,6 +98,27 @@ const CryptoDetails = () => {
           and supply.
         </p>
       </div>
+
+      <Typography.Title level={5}>
+        Change timeframe
+      </Typography.Title>
+      <Select
+        defaultValue={timeframe}
+        className="select-timeframe"
+        onChange={(value) => setTimeframe(value)}
+      >
+        {times.map((time) => (
+          <Select.Option key={time}>
+            {time}
+          </Select.Option>
+        ))}
+      </Select>
+
+      <LineChart
+        coinHistory={coinHistory}
+        currentPrice={millify(coin.price, { precision: 2 })}
+        coinName={coin.name}
+      />
 
       <div className="stats-container">
         <Typography.Title level={3} className="coin-details-heading">
@@ -112,14 +142,14 @@ const CryptoDetails = () => {
           <Typography.Title level={3} className="coin-details-heading">
             What is {coin.name}?
           </Typography.Title>
-          {HTMLReactParser(coin.description)}
+          {coin.description && HTMLReactParser(coin.description)}
         </Col>
-        <Col sm={24} lg={10} offset={2}>
+        <Col sm={24} lg={{ span: 10, offset: 2 }} className="coin-links">
           <Typography.Title level={3} className="coin-details-heading">
             {coin.name} Links
           </Typography.Title>
           {coin.links.map((link, i) => (
-            <Row key={i} className="coin-link-container">
+            <Row key={i} className="coin-link">
               <Typography.Title level={5}>{link.type}</Typography.Title>
               <a href={link.url} target="_blank" rel="noreferrer">
                 {link.name}

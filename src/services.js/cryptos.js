@@ -30,3 +30,16 @@ export const getCrypto = async (coinId) => {
     console.log(err);
   }
 };
+
+export const getCryptoHistory = async (coinId, timeframe) => {
+  try {
+    const res = await axios.get(
+      `https://coinranking1.p.rapidapi.com/coin/${coinId}/history/${timeframe}`,
+      { headers: cryptoApiHeaders }
+    );
+    
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
