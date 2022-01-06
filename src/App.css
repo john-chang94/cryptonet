@@ -198,6 +198,15 @@ a:hover {
   justify-content: space-between;
   align-items: center;
 }
+.exchange-panel-container {
+  width: 100%;
+}
+.exchange-image {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 
 .footer {
   background-color: rgb(0, 21, 41);

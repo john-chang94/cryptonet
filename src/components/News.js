@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, TYpography, Row, Col, Card, Typography } from "antd";
+import { Typography, Row, Col, Card } from "antd";
 import { parseISO, formatDistance } from "date-fns";
 import { useQuery } from "react-query";
 import { getCryptoNews } from "../services.js/cryptos";
@@ -12,7 +12,7 @@ const News = ({ simplified, query = "cryptocurrency" }) => {
     getCryptoNews(query, count)
   );
 
-  // Format article published date with suffix
+  // Format article's published date with suffix
   const formatTime = (date) => {
     const time = formatDistance(
       new Date(parseISO(date)),
@@ -22,7 +22,6 @@ const News = ({ simplified, query = "cryptocurrency" }) => {
 
     return time;
   };
-  console.log(query)
 
   const defaultImage =
     "http://coinrevolution.com/wp-content/uploads/2020/06/cryptonews.jpg";

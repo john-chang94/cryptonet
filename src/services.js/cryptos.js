@@ -61,3 +61,16 @@ export const getCryptoNews = async (query, count) => {
     console.log(err);
   }
 };
+
+export const getCryptoExchanges = async () => {
+  try {
+    const res = await axios.get(
+      `https://coinranking1.p.rapidapi.com/exchanges`,
+      { headers: cryptoApiHeaders }
+    );
+
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

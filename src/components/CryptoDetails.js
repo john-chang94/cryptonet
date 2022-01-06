@@ -40,7 +40,7 @@ const CryptoDetails = () => {
 
   const stats = [
     {
-      title: "Price to USD",
+      title: "Price in USD",
       value: `$${coin.price && millify(coin.price)}`,
       icon: <DollarCircleOutlined />,
     },
