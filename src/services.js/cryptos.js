@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const cryptoApiHeaders = {
-  "x-rapidapi-host": "coinranking1.p.rapidapi.com",
-  "x-rapidapi-key": "c69f98f65dmshd701837d3cab2e2p189dd6jsn8d7f621d2c1a",
+  "x-rapidapi-host": process.env.REACT_APP_COINRANKING_HOST,
+  "x-rapidapi-key": process.env.REACT_APP_COINRANKING_KEY,
 };
 
 const cryptoNewsApiHeaders = {
-  "x-rapidapi-host": "free-news.p.rapidapi.com",
-  "x-rapidapi-key": "c69f98f65dmshd701837d3cab2e2p189dd6jsn8d7f621d2c1a",
+  "x-rapidapi-host": process.env.REACT_APP_FREE_NEWS_HOST,
+  "x-rapidapi-key": process.env.REACT_APP_FREE_NEWS_KEY,
 };
 
 export const getCryptos = async (count) => {

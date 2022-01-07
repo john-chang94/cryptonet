@@ -23,7 +23,7 @@ const Cryptocurrencies = ({ simplified }) => {
     );
 
     setCryptos(filtered);
-  }, [search]);
+  }, [search, data]);
 
   // Set initial results for crypto list
   useEffect(() => {
