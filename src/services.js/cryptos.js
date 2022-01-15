@@ -52,8 +52,11 @@ export const getCryptoHistory = async (coinId, timeframe) => {
 export const getCryptoNews = async (query, count) => {
   try {
     const res = await axios.get(
-      `https://free-news.p.rapidapi.com/v1/search?q=${query}&page_size=${count}&lang=en`,
-      { headers: cryptoNewsApiHeaders }
+      `https://free-news.p.rapidapi.com/v1/search`,
+      {
+        params: { q: query, page_size: count, lang: "en" }, 
+        headers: cryptoNewsApiHeaders
+      }
     );
 
     return res.data;

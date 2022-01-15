@@ -41,23 +41,23 @@ const CryptoDetails = () => {
   const stats = [
     {
       title: "Price in USD",
-      value: `$${coin.price && millify(coin.price)}`,
+      value: `$${coin.price && millify(coin.price, { precision: 2 })}`,
       icon: <DollarCircleOutlined />,
     },
     { title: "Rank", value: coin.rank, icon: <NumberOutlined /> },
     {
       title: "24h Volume",
-      value: `$${coin.volume && millify(coin.volume)}`,
+      value: `$${coin.volume && millify(coin.volume, { precision: 2 })}`,
       icon: <ThunderboltOutlined />,
     },
     {
       title: "Market Cap",
-      value: `$${coin.marketCap && millify(coin.marketCap)}`,
+      value: `$${coin.marketCap && millify(coin.marketCap, { precision: 2 })}`,
       icon: <DollarCircleOutlined />,
     },
     {
       title: "All-time-high (daily avg.)",
-      value: `$${millify(coin.allTimeHigh.price)}`,
+      value: `$${millify(coin.allTimeHigh.price, { precision: 2 })}`,
       icon: <TrophyOutlined />,
     },
     {
@@ -161,7 +161,7 @@ const CryptoDetails = () => {
         <Typography.Title level={3}>
           {coin.name} News
         </Typography.Title>
-        <News simplified query={coin.name} />
+        <News simplified query={`${coin.name} crypto`} />
       </div>
     </div>
   );
