@@ -56,7 +56,7 @@ const CryptoDetails = () => {
       icon: <DollarCircleOutlined />,
     },
     {
-      title: "All-time-high (daily avg.)",
+      title: "All-time-high",
       value: `$${millify(coin.allTimeHigh.price, { precision: 2 })}`,
       icon: <TrophyOutlined />,
     },

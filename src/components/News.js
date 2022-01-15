@@ -26,7 +26,7 @@ const News = ({ simplified, query = "cryptocurrency" }) => {
   const defaultImage =
     "http://coinrevolution.com/wp-content/uploads/2020/06/cryptonews.jpg";
 
-  if (isLoading || !data.articles) return <Loader />;
+  if (isLoading || !data) return <Loader />;
 
   return (
     <div>
