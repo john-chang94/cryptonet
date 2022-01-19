@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const cryptoApiHeaders = {
-  "x-rapidapi-host": process.env.REACT_APP_COINRANKING_HOST,
-  "x-rapidapi-key": process.env.REACT_APP_COINRANKING_KEY,
+  "x-access-token": process.env.REACT_APP_COINRANKING_KEY,
 };
 
 const cryptoNewsApiHeaders = {
@@ -13,7 +12,7 @@ const cryptoNewsApiHeaders = {
 export const getCryptos = async (count) => {
   try {
     const res = await axios.get(
-      `https://coinranking1.p.rapidapi.com/coins?limit=${count}`,
+      `https://api.coinranking.com/v2/coins?limit=${count}`,
       { headers: cryptoApiHeaders }
     );
 
@@ -26,7 +25,7 @@ export const getCryptos = async (count) => {
 export const getCrypto = async (coinId) => {
   try {
     const res = await axios.get(
-      `https://coinranking1.p.rapidapi.com/coin/${coinId}`,
+      `https://api.coinranking.com/v2/coin/${coinId}`,
       { headers: cryptoApiHeaders }
     );
 
@@ -39,8 +38,11 @@ export const getCrypto = async (coinId) => {
 export const getCryptoHistory = async (coinId, timeframe) => {
   try {
     const res = await axios.get(
-      `https://coinranking1.p.rapidapi.com/coin/${coinId}/history/${timeframe}`,
-      { headers: cryptoApiHeaders }
+      `https://api.coinranking.com/v2/coin/${coinId}/history`,
+      {
+        params: { timePeriod: timeframe }, 
+        headers: cryptoApiHeaders
+      }
     );
 
     return res.data;
@@ -68,7 +70,7 @@ export const getCryptoNews = async (query, count) => {
 export const getCryptoExchanges = async () => {
   try {
     const res = await axios.get(
-      `https://coinranking1.p.rapidapi.com/exchanges`,
+      `https://api.coinranking.com/v2/exchanges`,
       { headers: cryptoApiHeaders }
     );
 

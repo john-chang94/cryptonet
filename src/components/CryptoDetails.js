@@ -72,17 +72,17 @@ const CryptoDetails = () => {
     },
     {
       title: "Aprroved Supply",
-      value: coin.approvedSupply ? <CheckOutlined /> : <StopOutlined />,
+      value: coin.supply.confirmed ? <CheckOutlined /> : <StopOutlined />,
       icon: <ExclamationCircleOutlined />,
     },
     {
       title: "Total Supply",
-      value: `${millify(coin.totalSupply)}`,
+      value: `${millify(coin.supply.total)}`,
       icon: <ExclamationCircleOutlined />,
     },
     {
       title: "Circulating Supply",
-      value: `${millify(coin.circulatingSupply)}`,
+      value: `${millify(coin.supply.circulating)}`,
       icon: <ExclamationCircleOutlined />,
     },
   ];
@@ -93,7 +93,7 @@ const CryptoDetails = () => {
     <div>
       <div className="coin-heading-container">
         <Typography.Title level={2}>
-          {coin.name} ({coin.slug}) Price
+          {coin.name} ({coin.symbol}) Price
         </Typography.Title>
         <p>
           {coin.name} live price in US dollars. View value statistics, marketcap
