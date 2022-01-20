@@ -12,6 +12,7 @@ import News from "./News";
 const Home = () => {
   const { data, isLoading } = useQuery(["cryptos"], () => getCryptos(10));
   const globalStats = data?.data?.stats;
+  // console.log(data);
 
   if (isLoading || !globalStats) return <Loader />;
 
