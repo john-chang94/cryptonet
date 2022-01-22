@@ -2,7 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Typography, Row, Col, Statistic } from "antd";
 import { useQuery } from "react-query";
-import { getCryptos } from "../services.js/cryptos";
+import {
+  getCryptoOverview,
+  getCryptoOverviewHistory,
+} from "../services.js/cryptos";
 import millify from "millify";
 
 import Cryptocurrencies from "./Cryptocurrencies";
@@ -10,11 +13,18 @@ import Loader from "./Loader";
 import News from "./News";
 
 const Home = () => {
-  const { data, isLoading } = useQuery(["cryptos"], () => getCryptos(10));
-  const globalStats = data?.data?.stats;
-  console.log(data);
+  const { data: overview, isLoading } = useQuery(["overview"], () =>
+    getCryptoOverview()
+  );
+  const { data: overviewHistory } = useQuery(["overviewHistory"], () =>
+    getCryptoOverviewHistory()
+  );
 
-  if (isLoading || !globalStats) return <Loader />;
+  if (isLoading || !overview) return <Loader />;
+
+  const lastDay = overviewHistory[overviewHistory.length - 1].cap;
+  const firstDay = overviewHistory[0].cap;
+  const marketCapDifference = (lastDay / firstDay - 1) * 100;
 
   return (
     <div>
@@ -23,30 +33,30 @@ const Home = () => {
       </Typography.Title>
       <Row>
         <Col span={12}>
-          <Statistic title="Total Cryptocurrencies" value={globalStats.total} />
-        </Col>
-        <Col span={12}>
           <Statistic
-            title="Total Exchanges"
-            value={globalStats.totalExchanges}
+            title="Total Market Cap"
+            value={`${millify(overview.cap, { precision: 2 })} (${millify(
+              marketCapDifference,
+              { precision: 2 }
+            )}%)`}
           />
         </Col>
         <Col span={12}>
           <Statistic
-            title="Total Market Cap"
-            value={millify(globalStats.totalMarketCap, { precision: 2 })}
+            title="Total Liquidity"
+            value={millify(overview.liquidity, { precision: 2 })}
           />
         </Col>
         <Col span={12}>
           <Statistic
             title="Total 24h Volume"
-            value={millify(globalStats.total24hVolume, { precision: 2 })}
+            value={millify(overview.volume, { precision: 2 })}
           />
         </Col>
         <Col span={12}>
           <Statistic
-            title="Total Markets"
-            value={millify(globalStats.totalMarkets, { precision: 2 })}
+            title="BTC Dominance"
+            value={`${millify(overview.btcDominance * 100, { precision: 2 })}%`}
           />
         </Col>
       </Row>
@@ -58,11 +68,9 @@ const Home = () => {
         </Typography.Title>
       </div>
       <Cryptocurrencies simplified />
-      
+
       <div className="home-news-label">
-        <Typography.Title level={3}>
-          Latest Crypto News
-        </Typography.Title>
+        <Typography.Title level={3}>Latest Crypto News</Typography.Title>
         <Typography.Title level={3}>
           <Link to="/news">Show More</Link>
         </Typography.Title>

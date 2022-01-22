@@ -11,25 +11,25 @@ const Cryptocurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100;
   const [cryptos, setCryptos] = useState(null);
   const [search, setSearch] = useState("");
-  
+
   const { data, isLoading } = useQuery(["cryptos", count], () =>
     getCryptos(count)
   );
-
+  
   // Filter through list with user's search term
   useEffect(() => {
-    const filtered = data?.data?.coins.filter((coin) =>
-      coin.name.toLowerCase().includes(search.toLowerCase())
+    const filtered = cryptos?.filter((coin) =>
+    coin.name.toLowerCase().includes(search.toLowerCase())
     );
-
+    
     setCryptos(filtered);
-  }, [search, data]);
-
+  }, [search]);
+  
   // Set initial results for crypto list
   useEffect(() => {
-    setCryptos(data?.data?.coins);
+    setCryptos(data);
   }, [data]);
-
+  
   if (isLoading) return <Loader />;
 
   return (
@@ -50,24 +50,22 @@ const Cryptocurrencies = ({ simplified }) => {
       <Row gutter={[24, 24]}>
         {cryptos &&
           cryptos.map((crypto) => (
-            <Col key={crypto.uuid} xl={6} lg={8} sm={12} xs={24}>
+            <Col key={crypto.code} xl={6} lg={8} sm={12} xs={24}>
               <Link to={`/coin/${crypto.uuid}`}>
                 <Card
-                  title={`${crypto.rank} ${crypto.name}`}
+                  title={`${crypto.name}`}
                   extra={
                     <img
-                      src={crypto.iconUrl}
+                      src={crypto.png32}
                       className="crypto-icon"
                       alt="cryptocurrency icon"
                     />
                   }
                   hoverable
                 >
-                  <p>Price: {millify(crypto.price, { precision: 2 })}</p>
-                  <p>
-                    Market Cap: {millify(crypto.marketCap, { precision: 2 })}
-                  </p>
-                  <p>24h Change: {millify(crypto.change, { precision: 2 })}%</p>
+                  <p>Price: {millify(crypto.rate, { precision: 2 })}</p>
+                  <p>Market Cap: {millify(crypto.cap, { precision: 2 })}</p>
+                  {/* <p>24h Change: {millify(crypto.change, { precision: 2 })}%</p> */}
                 </Card>
               </Link>
             </Col>

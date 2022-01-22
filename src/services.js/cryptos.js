@@ -1,4 +1,5 @@
 import axios from "axios";
+import { subDays } from "date-fns";
 
 const cryptoApiHeaders = {
   "x-access-token": process.env.REACT_APP_COINRANKING_KEY,
@@ -12,6 +13,42 @@ const cryptoNewsApiHeaders = {
 const headerConfig = {
   "content-type": "application/json",
   "x-api-key": process.env.REACT_APP_LIVECOINWATCH_KEY,
+};
+
+export const getCryptoOverview = async () => {
+  try {
+    const body = { currency: "USD" };
+    const res = await axios.post(
+      `https://api.livecoinwatch.com/overview`,
+      body,
+      { headers: headerConfig }
+    );
+
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getCryptoOverviewHistory = async () => {
+  try {
+    const previousDay = subDays(new Date(Date.now()), 1);
+    const body = {
+      currency: "USD",
+      start: new Date(previousDay).getTime(),
+      end: new Date(Date.now()).getTime(),
+    };
+
+    const res = await axios.post(
+      `https://api.livecoinwatch.com/overview/history`,
+      body,
+      { headers: headerConfig }
+    );
+
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const getCryptos = async (count) => {
@@ -55,11 +92,10 @@ export const getCryptoHistory = async (coinId, timeStart, timeEnd) => {
     const body = {
       currency: "USD",
       code: "BTC",
-      start: new Date(2022, 0, 12).getTime(),
-      end: new Date(2022, 0, 21).getTime(),
+      start: new Date(2022, 0, 19).getTime(),
+      end: new Date(2022, 0, 20).getTime(),
       meta: true,
     };
-    console.log(new Date(body.end));
 
     const res = await axios.post(
       `https://api.livecoinwatch.com/coins/single/history`,
