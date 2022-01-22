@@ -16,24 +16,20 @@ const headerConfig = {
 
 export const getCryptos = async (count) => {
   try {
-    // const body = {
-    //   currency: "USD",
-    //   sort: "rank",
-    //   order: "ascending",
-    //   offset: 0,
-    //   limit: count,
-    //   meta: true,
-    // };
+    const body = {
+      currency: "USD",
+      sort: "rank",
+      order: "ascending",
+      offset: 0,
+      limit: count,
+      meta: true,
+    };
 
-    // const res = await axios.post(
-    //   `https://api.livecoinwatch.com/coins/list`,
-    //   body,
-    //   {
-    //     headers: headerConfig
-    //   }
-    // );
-    const res = await axios.get(`http://localhost:5000/api/cryptos?count=${count}`)
-    console.log(res);
+    const res = await axios.post(
+      `https://api.livecoinwatch.com/coins/list`,
+      body,
+      { headers: headerConfig }
+    );
 
     return res.data;
   } catch (err) {
@@ -54,14 +50,21 @@ export const getCrypto = async (coinId) => {
   }
 };
 
-export const getCryptoHistory = async (coinId, timeframe) => {
+export const getCryptoHistory = async (coinId, timeStart, timeEnd) => {
   try {
-    const res = await axios.get(
-      `https://api.coinranking.com/v2/coin/${coinId}/history`,
-      {
-        params: { timePeriod: timeframe },
-        headers: cryptoApiHeaders,
-      }
+    const body = {
+      currency: "USD",
+      code: "BTC",
+      start: new Date(2022, 0, 12).getTime(),
+      end: new Date(2022, 0, 21).getTime(),
+      meta: true,
+    };
+    console.log(new Date(body.end));
+
+    const res = await axios.post(
+      `https://api.livecoinwatch.com/coins/single/history`,
+      body,
+      { headers: headerConfig }
     );
 
     return res.data;

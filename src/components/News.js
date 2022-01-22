@@ -31,8 +31,8 @@ const News = ({ simplified, query = "cryptocurrency" }) => {
   return (
     <div>
       <Row gutter={[24, 24]}>
-        {data?.articles.map((article) => (
-          <Col xs={24} sm={12} lg={8} key={article.id}>
+        {data?.articles.map((article, i) => (
+          <Col xs={24} sm={12} lg={8} key={i}>
             <Card hoverable className="news-card">
               <a href={article.link} target="_blank" rel="noreferrer">
                 <div className="news-image-container">
