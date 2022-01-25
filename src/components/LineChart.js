@@ -11,7 +11,6 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { Col, Row, Typography } from "antd";
-import Loader from "./Loader";
 
 ChartJS.register(
   CategoryScale,
@@ -27,15 +26,13 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   const coinPrices = [];
   const coinTimestamps = [];
 
-  if (!coinHistory) return <Loader />
-
-  for (let i = 0; i < coinHistory.data.history.length; i++) {
-    coinPrices.push(coinHistory.data.history[i].price);
+  for (let i = 0; i < coinHistory.length; i++) {
+    coinPrices.push(coinHistory[i].rate);
   }
 
-  for (let i = 0; i < coinHistory.data.history.length; i++) {
+  for (let i = 0; i < coinHistory.length; i++) {
     coinTimestamps.push(
-      new Date(coinHistory.data.history[i].timestamp).toLocaleDateString()
+      new Date(coinHistory[i].date).toLocaleString().replace(":00", "")
     );
   }
 
@@ -59,9 +56,9 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
               {coinName} Price Chart
           </Typography.Title>
           <Col className="price-container">
-              <Typography.Title level={5}>
+              {/* <Typography.Title level={5}>
                   {coinHistory.data.change}%
-              </Typography.Title>&nbsp;&nbsp;
+              </Typography.Title>&nbsp;&nbsp; */}
               <Typography.Title level={5}>
                   Current Price: ${currentPrice}
               </Typography.Title>

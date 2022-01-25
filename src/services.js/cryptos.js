@@ -74,11 +74,17 @@ export const getCryptos = async (count) => {
   }
 };
 
-export const getCrypto = async (coinId) => {
+export const getCrypto = async (code) => {
   try {
-    const res = await axios.get(
-      `https://api.coinranking.com/v2/coin/${coinId}`,
-      { headers: cryptoApiHeaders }
+    const body = {
+      currency: "USD",
+      code: code,
+      meta: true
+    }
+    const res = await axios.post(
+      `https://api.livecoinwatch.com/coins/single`,
+      body,
+      { headers: headerConfig }
     );
 
     return res.data;
@@ -87,13 +93,13 @@ export const getCrypto = async (coinId) => {
   }
 };
 
-export const getCryptoHistory = async (coinId, timeStart, timeEnd) => {
+export const getCryptoHistory = async (code, timeStart, timeEnd) => {
   try {
     const body = {
       currency: "USD",
-      code: "BTC",
-      start: new Date(2022, 0, 19).getTime(),
-      end: new Date(2022, 0, 20).getTime(),
+      code: code,
+      start: timeStart,
+      end: timeEnd,
       meta: true,
     };
 

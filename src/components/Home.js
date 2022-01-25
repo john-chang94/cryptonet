@@ -20,8 +20,9 @@ const Home = () => {
     getCryptoOverviewHistory()
   );
 
-  if (isLoading || !overview) return <Loader />;
+  if (isLoading || !overviewHistory) return <Loader />;
 
+  // Calculate market percentage move in last 24h
   const lastDay = overviewHistory[overviewHistory.length - 1].cap;
   const firstDay = overviewHistory[0].cap;
   const marketCapDifference = (lastDay / firstDay - 1) * 100;

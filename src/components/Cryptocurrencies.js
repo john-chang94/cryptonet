@@ -23,7 +23,7 @@ const Cryptocurrencies = ({ simplified }) => {
     );
     
     setCryptos(filtered);
-  }, [search]);
+  }, [search, cryptos]);
   
   // Set initial results for crypto list
   useEffect(() => {
@@ -49,11 +49,11 @@ const Cryptocurrencies = ({ simplified }) => {
       )}
       <Row gutter={[24, 24]}>
         {cryptos &&
-          cryptos.map((crypto) => (
+          cryptos.map((crypto, i) => (
             <Col key={crypto.code} xl={6} lg={8} sm={12} xs={24}>
-              <Link to={`/coin/${crypto.uuid}`}>
+              <Link to={`/coin/${++i}/${crypto.code}`}>
                 <Card
-                  title={`${crypto.name}`}
+                  title={`${++i}. ${crypto.name}`}
                   extra={
                     <img
                       src={crypto.png32}
@@ -63,9 +63,8 @@ const Cryptocurrencies = ({ simplified }) => {
                   }
                   hoverable
                 >
-                  <p>Price: {millify(crypto.rate, { precision: 2 })}</p>
+                  <p>Price: {`$${millify(crypto.rate, { precision: 2 })}`}</p>
                   <p>Market Cap: {millify(crypto.cap, { precision: 2 })}</p>
-                  {/* <p>24h Change: {millify(crypto.change, { precision: 2 })}%</p> */}
                 </Card>
               </Link>
             </Col>
