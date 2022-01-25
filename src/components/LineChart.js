@@ -56,9 +56,6 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
               {coinName} Price Chart
           </Typography.Title>
           <Col className="price-container">
-              {/* <Typography.Title level={5}>
-                  {coinHistory.data.change}%
-              </Typography.Title>&nbsp;&nbsp; */}
               <Typography.Title level={5}>
                   Current Price: ${currentPrice}
               </Typography.Title>

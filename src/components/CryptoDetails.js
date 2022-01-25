@@ -27,6 +27,7 @@ const CryptoDetails = () => {
   const { rank, code } = useParams();
   const [timeframe, setTimeframe] = useState("24h");
   const [startTime, setStartTime] = useState(yesterday.getTime());
+  // eslint-disable-next-line no-unused-vars
   const [endTime, setEndTime] = useState(today.getTime());
 
   const { data: coin, isLoading } = useQuery(["crypto", code], () =>
