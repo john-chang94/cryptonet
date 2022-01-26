@@ -1,10 +1,6 @@
 import axios from "axios";
 import { subDays } from "date-fns";
 
-const cryptoApiHeaders = {
-  "x-access-token": process.env.REACT_APP_COINRANKING_KEY,
-};
-
 const cryptoNewsApiHeaders = {
   "x-rapidapi-host": process.env.REACT_APP_FREE_NEWS_HOST,
   "x-rapidapi-key": process.env.REACT_APP_FREE_NEWS_KEY,
@@ -79,8 +75,8 @@ export const getCrypto = async (code) => {
     const body = {
       currency: "USD",
       code: code,
-      meta: true
-    }
+      meta: true,
+    };
     const res = await axios.post(
       `https://api.livecoinwatch.com/coins/single`,
       body,
@@ -130,9 +126,19 @@ export const getCryptoNews = async (query, count) => {
 
 export const getCryptoExchanges = async () => {
   try {
-    const res = await axios.get(`https://api.coinranking.com/v2/exchanges`, {
-      headers: cryptoApiHeaders,
-    });
+    const body = {
+      currency: "USD",
+      sort: "volume",
+      order: "descending",
+      offset: 0,
+      limit: 100,
+      meta: true,
+    };
+    const res = await axios.post(
+      `https://api.livecoinwatch.com/exchanges/list`,
+      body,
+      { headers: headerConfig }
+    );
 
     return res.data;
   } catch (err) {

@@ -1,61 +1,57 @@
 import React from "react";
-import { Row, Col, Collapse } from "antd";
+import { Table } from "antd";
 import { useQuery } from "react-query";
 import { getCryptoExchanges } from "../services.js/cryptos";
 import millify from "millify";
-import HTMLReactParser from "html-react-parser";
 
 import Loader from "./Loader";
 
 const Exchanges = () => {
-  const { data, isLoading } = useQuery(["cryptoExchanges"], () =>
+  const { data: exchanges, isLoading } = useQuery(["cryptoExchanges"], () =>
     getCryptoExchanges()
   );
 
   if (isLoading) return <Loader />;
 
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name"
+    },
+    {
+      title: "Volume",
+      dataIndex: "volume",
+      key: "volume",
+    },
+    {
+      title: "Visitors",
+      dataIndex: "visitors",
+      key: "visitors",
+    },
+    {
+      title: "Centralized",
+      dataIndex: "centralized",
+      key: "centralized",
+    }
+  ];
+
+  // Push fetched data into new array with millified numbers for table
+  const data = [];
+  for (let i = 0; i < exchanges.length; i++) {
+    let obj = {
+      name: `${i === 0 ? ++i : i}. ${exchanges[i].name}`, // index for numbering displayed rows
+      volume: millify(exchanges[i].volume, { precision: 2 }),
+      visitors: millify(exchanges[i].visitors, { precision: 2 }),
+      centralized: exchanges[i].centralized ? "Yes" : "No"
+    };
+
+    data.push(obj);
+  }
+
   return (
     <div>
-      <Row>
-        <Col span={6}>
-          <strong>Exchanges</strong>
-        </Col>
-        <Col span={6}>
-          <strong>24h Trade Volume</strong>
-        </Col>
-        <Col span={6}>
-          <strong>Markets</strong>
-        </Col>
-        <Col span={6}>
-          <strong>% Change</strong>
-        </Col>
-      </Row>
-      <Collapse>
-        {data.data.exchanges.map((exchange) => (
-          <Collapse.Panel
-            key={exchange.id}
-            showArrow={false}
-            header={
-              <Row className="exchange-panel-container">
-                <Col span={6}>
-                  <strong>{exchange.rank}</strong>
-                  <img
-                    src={exchange.iconUrl}
-                    className="exchange-image"
-                    alt="exchange icon"
-                  />
-                  <strong>{exchange.name}</strong>
-                </Col>
-                <Col span={6}>{millify(exchange.volume, { precision: 2 })}</Col>
-                <Col span={6}>{exchange.numberOfMarkets}</Col>
-                <Col span={6}>{millify(exchange.marketShare)}%</Col>
-              </Row>
-            }
-          >
-            {HTMLReactParser(exchange.description || "")}
-          </Collapse.Panel>
-        ))}
-      </Collapse>
+      <Table dataSource={data} columns={columns} pagination={false} />
     </div>
   );
 };

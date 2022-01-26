@@ -38,7 +38,10 @@ const CryptoDetails = () => {
     () => getCryptoHistory(code, startTime, endTime)
   );
 
+  const times = ["3h", "24h", "7d", "30d", "3m", "6m", "1y", "5y"];
+
   useEffect(() => {
+    // Set timeframe for line chart
     switch (timeframe) {
       case "3h":
         setStartTime(new Date(subHours(endTime, 3)).getTime());
@@ -67,7 +70,7 @@ const CryptoDetails = () => {
       default:
         return;
     }
-  }, [timeframe, endTime])
+  }, [timeframe, endTime]);
 
   // Placed before assigning stats array because data needs to be fetched
   if (isLoading || !coinHistory) return <Loader />;
@@ -111,12 +114,12 @@ const CryptoDetails = () => {
     },
     {
       title: "Circulating Supply",
-      value: `${coin.circulatingSupply ? millify(coin.circulatingSupply) : "N/A"}`,
+      value: `${
+        coin.circulatingSupply ? millify(coin.circulatingSupply) : "N/A"
+      }`,
       icon: <ExclamationCircleOutlined />,
     },
   ];
-
-  const times = ["3h", "24h", "7d", "30d", "3m", "6m", "1y", "5y"];
 
   return (
     <div>
@@ -165,9 +168,7 @@ const CryptoDetails = () => {
       </div>
 
       <div className="coin-news-heading">
-        <Typography.Title level={3}>
-          {coin.name} News
-        </Typography.Title>
+        <Typography.Title level={3}>{coin.name} News</Typography.Title>
         <News simplified query={`${coin.name} crypto`} />
       </div>
     </div>
