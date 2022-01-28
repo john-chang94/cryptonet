@@ -43,7 +43,8 @@ const Exchanges = () => {
       name: `${i === 0 ? ++i : i}. ${exchanges[i].name}`, // index for numbering displayed rows
       volume: millify(exchanges[i].volume, { precision: 2 }),
       visitors: millify(exchanges[i].visitors, { precision: 2 }),
-      centralized: exchanges[i].centralized ? "Yes" : "No"
+      centralized: exchanges[i].centralized ? "Yes" : "No",
+      key: i
     };
 
     data.push(obj);
