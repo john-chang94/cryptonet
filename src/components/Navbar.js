@@ -20,8 +20,6 @@ const Navbar = () => {
 
     window.addEventListener("resize", handleResize);
 
-    handleResize();
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -32,6 +30,19 @@ const Navbar = () => {
       setActiveMenu(true);
     }
   }, [screenSize]);
+
+  // Hide drop down menu after user clicks on something
+  useEffect(() => {
+    const handleMenuClick = () => setActiveMenu(!activeMenu);
+
+    if (activeMenu) {
+      window.addEventListener("click", handleMenuClick);
+    } else {
+      return () => window.removeEventListener("click", handleMenuClick);
+    }
+
+    return () => window.removeEventListener("click", handleMenuClick);
+  }, [activeMenu])
 
   return (
     <div className="nav-container">

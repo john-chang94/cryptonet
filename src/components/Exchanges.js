@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Table } from "antd";
 import { useQuery } from "react-query";
 import { getCryptoExchanges } from "../services.js/cryptos";
@@ -7,9 +7,21 @@ import millify from "millify";
 import Loader from "./Loader";
 
 const Exchanges = () => {
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
   const { data: exchanges, isLoading } = useQuery(["cryptoExchanges"], () =>
-    getCryptoExchanges()
+  getCryptoExchanges()
   );
+  
+  const handleResize = () => {
+    setScreenSize(window.innerWidth);
+  }
+
+  // Decrease padding in table cells in smaller screens
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [screenSize]);
 
   if (isLoading) return <Loader />;
 
@@ -51,7 +63,7 @@ const Exchanges = () => {
   }
 
   return (
-    <div>
+    <div className={`${screenSize < 450 && "exchanges"}`}>
       <Table dataSource={data} columns={columns} pagination={false} />
     </div>
   );

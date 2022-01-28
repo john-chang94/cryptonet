@@ -64,7 +64,7 @@ const Home = () => {
 
       <div className="home-cryptos-label">
         <Typography.Title level={3}>Top 10 Cryptocurrencies</Typography.Title>
-        <Typography.Title level={3}>
+        <Typography.Title level={3} className="home-show-more">
           <Link to="/coins">Show More</Link>
         </Typography.Title>
       </div>
@@ -72,7 +72,7 @@ const Home = () => {
 
       <div className="home-news-label">
         <Typography.Title level={3}>Latest Crypto News</Typography.Title>
-        <Typography.Title level={3}>
+        <Typography.Title level={3} className="home-show-more">
           <Link to="/news">Show More</Link>
         </Typography.Title>
       </div>

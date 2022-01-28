@@ -33,7 +33,7 @@ a:hover {
   display: none !important;
   position: absolute !important;
   right: 10px !important;
-  top: 25px !important;
+  top: 18px !important;
   font-size: 1.2rem !important;
   background-color: var(--bgSecondary) !important;
   border: none !important;
@@ -81,7 +81,7 @@ a:hover {
   }
   .main {
     flex: 1;
-    margin-top: 90px;
+    margin-top: 70px;
     margin-left: 0px;
     margin-right: 10px;
   }
@@ -92,6 +92,9 @@ a:hover {
     z-index: 100;
     background-color: #F9F9F9 !important;
   }
+  .logo-container {
+    height: 75px;
+  }
   .menu-control-container {
     display: block !important;
   }
@@ -99,13 +102,16 @@ a:hover {
     position: absolute;
     right: 0px;
   }
+  .home-show-more {
+    text-align: right;
+  }
 }
 
 .crypto-icon {
   width: 30px;
 }
 .home-cryptos-label {
-  margin-top: 30px;
+  margin-top: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -193,19 +199,19 @@ a:hover {
   color: black;
 }
 .home-news-label {
-  margin-top: 30px;
+  margin-top: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.exchange-panel-container {
-  width: 100%;
+.home-show-more {
+  margin-top: 0 !important;
 }
-.exchange-image {
-  width: 30px;
-  height: 30px;
-  margin-left: 10px;
-  margin-right: 10px;
+.exchanges table th {
+  padding: 6px !important;
+}
+.exchanges table td {
+  padding: 6px !important;
 }
 
 .footer {

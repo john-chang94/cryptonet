@@ -46,7 +46,7 @@ const CryptoDetails = () => {
       case "3h":
         setStartTime(new Date(subHours(endTime, 3)).getTime());
         break;
-      case "24":
+      case "24h":
         setStartTime(new Date(subHours(endTime, 24)).getTime());
         break;
       case "7d":

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { getCryptos } from "../services.js/cryptos";
@@ -23,12 +24,12 @@ const Cryptocurrencies = ({ simplified }) => {
     );
     
     setCryptos(filtered);
-  }, [search, cryptos]);
+  }, [search]);
   
   // Set initial results for crypto list
   useEffect(() => {
-    setCryptos(data);
-  }, [data]);
+    if (!isLoading) setCryptos(data);
+  }, [isLoading]);
   
   if (isLoading) return <Loader />;
 
