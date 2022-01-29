@@ -14,11 +14,14 @@ import icon from "../images/cryptocurrency.png";
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(false);
   const [screenSize, setScreenSize] = useState(null);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
 
     window.addEventListener("resize", handleResize);
+
+    handleResize(); // Show full screen menu on page load
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -26,8 +29,10 @@ const Navbar = () => {
   useEffect(() => {
     if (screenSize < 768) {
       setActiveMenu(false);
+      setIsSmallScreen(true);
     } else {
       setActiveMenu(true);
+      setIsSmallScreen(false);
     }
   }, [screenSize]);
 
@@ -35,14 +40,13 @@ const Navbar = () => {
   useEffect(() => {
     const handleMenuClick = () => setActiveMenu(!activeMenu);
 
-    if (activeMenu) {
+    // Add event listener only on small screens
+    if (activeMenu && isSmallScreen) {
       window.addEventListener("click", handleMenuClick);
-    } else {
-      return () => window.removeEventListener("click", handleMenuClick);
     }
 
     return () => window.removeEventListener("click", handleMenuClick);
-  }, [activeMenu])
+  }, [activeMenu, isSmallScreen])
 
   return (
     <div className="nav-container">
