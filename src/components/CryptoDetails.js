@@ -169,7 +169,7 @@ const CryptoDetails = () => {
 
       <div className="coin-news-heading">
         <Typography.Title level={3}>{coin.name} News</Typography.Title>
-        <News simplified query={`${coin.name} crypto`} />
+        <News simplified query={`${coin.name} cryptocurrency`} />
       </div>
     </div>
   );
