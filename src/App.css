@@ -2,8 +2,10 @@
   margin: 0;
   padding: 0;
 }
+#root {
+  height: 100%;
+}
 .app {
-  overflow: hidden;
   display: flex;
 }
 a:hover {
@@ -74,7 +76,7 @@ a:hover {
 @media screen and (max-width: 768px) {
   .app {
     flex-direction: column;
-    overflow: hidden;
+    height: 100%;
   }
   .navbar {
     flex: 1;

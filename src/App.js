@@ -32,10 +32,9 @@ function App() {
             </div>
           </Layout>
           <div className="footer">
-            <Typography.Title className="footer-title">
-              CryptoNet <br />
-              All rights reserved
-            </Typography.Title>
+            <Typography.Text className="footer-title">
+              © 2022 CryptoNet
+            </Typography.Text>
             <Space>
               <Link to="/">Home</Link>
               <Link to="/exchanges">Exchanges</Link>
