@@ -15,4 +15,4 @@ Cryptocurrency price tracker. View global crypto market capitalization, trading 
 - See all operating exchanges
 
 ## Screenshots
-![](https://firebasestorage.googleapis.com/v0/b/shared-images-afe55.appspot.com/o/github%2Fcryptonet.gif?alt=media&token=79ee68c3-12ea-4aa8-ab48-484a1d103853a)
+![](https://firebasestorage.googleapis.com/v0/b/shared-images-afe55.appspot.com/o/github%2Fcryptonet.gif?alt=media&token=79ee68c3-12ea-4aa8-ab48-484a1d103853)
